@@ -1,0 +1,13 @@
+Package: thermochronplotr
+Type: Package
+Title: Make Common Plots in AHe Thermochronology
+Version: 0.1.0
+Author: Jessica Stanley
+Maintainer: Jessica <jstanley26@gmail.com>
+Description: This package takes the output text files that result from inversion models from the HeFTy thermal history modelling software (Ketcham, 2005) and plots them. There are options both for single inversions and to plot multiple inversions in a grid format. Future versions will make date-eU plots.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: tidyr, readr, stringr, ggplot2, dplyr, magrittr, purrr
+RoxygenNote: 7.1.0
+
