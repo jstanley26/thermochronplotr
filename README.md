@@ -36,6 +36,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(thermochronplotr)
+#> Loading required package: rlang
 ```
 
 ### Single HeFTy inversion plot
@@ -60,7 +61,7 @@ example, if you want to change the x axis limits
 
 ``` r
 library(ggplot2)
-plot1+coord_cartesian(xlim=c(0,200))
+plot1+coord_cartesian(xlim=c(200,0))
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />

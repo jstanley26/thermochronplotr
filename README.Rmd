@@ -57,7 +57,7 @@ plot1
 
 ```{r }
 library(ggplot2)
-plot1+coord_cartesian(xlim=c(0,200))
+plot1+coord_cartesian(xlim=c(200,0))
 ```
 
 ### Multiple HeFTy inversion facet
