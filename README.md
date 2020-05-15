@@ -27,7 +27,7 @@ This package is only available on github. To install this please install
 `devtools` package within R. Then:
 
 ``` r
-devtools::install_github('thermochronplotr','jstanley26')
+devtools::install_github('jstanley26/thermochronplotr')
 ```
 
 ## Example
