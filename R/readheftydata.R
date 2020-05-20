@@ -23,9 +23,6 @@ findline <- function(fn,lnstr){
 #' @param fn a filename of HeFTy text file output
 #' @param smpl sample name for hefty file
 #' @return dataframe with constraints
-#' @examples
-#' fn=system.file("extdata","SA13-13_02-inv.txt",package="HeFTyPlotteR")
-#' readconstraints(fn)
 
 readconstraint <- function(fn,smpl){
 
@@ -47,8 +44,9 @@ readconstraint <- function(fn,smpl){
 #' @return dataframe with constraints
 #' @export
 #' @examples
-#' fn=system.file("extdata","SA13-13_02-inv.txt",package="HeFTyPlotteR")
+#' fn=system.file("extdata","HeFTyOut-Sample1.txt",package="thermochronplotr")
 #' readconstraints(fn)
+#' # NOTE: fn should point to your own file on your system
 
 readconstraints <- function(fn, smpl){
   if(length(fn)>1){
@@ -136,7 +134,5 @@ readpaths <- function(fn,smpl){
 
 }
 
-# dfplot %>%
-#   group_by(FitType) %>%
-#   sample_frac(.5)
+
 

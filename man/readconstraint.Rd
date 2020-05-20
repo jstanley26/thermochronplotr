@@ -17,7 +17,3 @@ dataframe with constraints
 \description{
 This reads the hefty constraints and assigns the column names that will be used for plotting
 }
-\examples{
-fn=system.file("extdata","SA13-13_02-inv.txt",package="HeFTyPlotteR")
-readconstraints(fn)
-}

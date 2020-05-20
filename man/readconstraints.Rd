@@ -18,6 +18,7 @@ dataframe with constraints
 Read Hefty Constraints
 }
 \examples{
-fn=system.file("extdata","SA13-13_02-inv.txt",package="HeFTyPlotteR")
+fn=system.file("extdata","HeFTyOut-Sample1.txt",package="thermochronplotr")
 readconstraints(fn)
+# NOTE: fn should point to your own file on your system
 }
