@@ -63,6 +63,7 @@ example, if you want to change the x axis limits
 ``` r
 library(ggplot2)
 plot1+coord_cartesian(xlim=c(200,0))
+#> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
@@ -100,7 +101,10 @@ To use this function you must first create or read in a dataframe with
 “Sample”, where eU is the effective Uranium, Date is the (U-Th)/He date,
 Unc is the uncertaity (for error bars), and Sample is the sample name
 (only truly required if you have more than one sample you are trying to
-plot)
+plot). “Color” is a column by which you can color the data points, for
+example you might have most of the data in black, but a few data points
+that are outliers to be plotted in grey that info is contained in the
+“Color” column.
 
 ``` r
 fn=system.file("extdata","AHe_data.csv",package="thermochronplotr")
@@ -132,7 +136,7 @@ If you had forward models that you want to plot predicted date-eU paths
 you can plot these by adding a second dataframe, `bestfitdf`, with those
 predictions. Again this dataframe needs to have columns “Date” and “eU”
 (and “Sample” if there are multiple
-samples:
+samples):
 
 ``` r
 fn2=system.file("extdata","ForwardModels.csv",package="thermochronplotr")
@@ -168,4 +172,6 @@ plot5 = shuffle_plots(hedf,bestfitdf,dfplot2,cons2)
 plot5
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" /> Axis
+limits are the same across the shuffled grid and can be input manually
+or are calculated from the total dataset

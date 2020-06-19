@@ -4,7 +4,17 @@
 \alias{shuffle_plots}
 \title{A function to plot HeFTy and date-eU plots side by side (shuffled)}
 \usage{
-shuffle_plots(hedf, bestfitdf, heftydf, constraints, eUbin = NULL)
+shuffle_plots(
+  hedf,
+  bestfitdf,
+  heftydf,
+  constraints,
+  eUbin = NULL,
+  helim = c(NA, NA),
+  eUlim = c(NA, NA),
+  timelim = c(NA, NA),
+  templim = c(NA, NA)
+)
 }
 \arguments{
 \item{hedf}{tidy dataframe with (U-Th)/He data and columns labeled "eU", "Date", "Unc", "Color", "Sample", "Description", "Elevation_m"}
@@ -16,6 +26,14 @@ shuffle_plots(hedf, bestfitdf, heftydf, constraints, eUbin = NULL)
 \item{constraints}{dataframe with HeFTy constraints extracted with `readconstraints()`}
 
 \item{eUbin}{value or vector for eU value(s) where bins are split for HeFTy modeling}
+
+\item{helim}{limits for the y (He date) axis, must be a vector of 2-defaults to NA where limits are set based on the total dataset starting at 0}
+
+\item{eUlim}{limits for the x (eU) axis, must be a vector of 2-defaults to NA where limits are set based on the total dataset starting at 0}
+
+\item{timelim}{vector of length 2 with limits for time (x) axis. Defaults to NA where limits are set based on the total dataset starting at 0}
+
+\item{templim}{vector of length 2 with limits for temperature (y) axis. Defaults to NA, where limits are set based on the total dataset}
 }
 \description{
 This function will take a tidy dataframe of (U-Th)/He data and make simple plots it

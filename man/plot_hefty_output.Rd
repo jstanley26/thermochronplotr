@@ -4,7 +4,13 @@
 \alias{plot_hefty_output}
 \title{A plotting function for HeFTy inversions}
 \usage{
-plot_hefty_output(dF, constraints, facet_vars = "Sample")
+plot_hefty_output(
+  dF,
+  constraints,
+  facet_vars = "Sample",
+  timelim = c(NA, NA),
+  templim = c(NA, NA)
+)
 }
 \arguments{
 \item{dF}{tidy dataframe extracted from HeFTy paths extracted with `readpaths()`}
@@ -12,6 +18,10 @@ plot_hefty_output(dF, constraints, facet_vars = "Sample")
 \item{constraints}{dataframe with HeFTy constraints extracted with `readconstraints()`}
 
 \item{facet_vars}{which variable to facet on, defaults to `Sample`. Currently the only option}
+
+\item{timelim}{vector of length 2 with limits for time (x) axis. Defaults to NA, which lets ggplot set limits}
+
+\item{templim}{vector of length 2 with limits for temperature (y) axis. Defaults to NA, which lets ggplot set limits}
 }
 \description{
 This function will take a tidy dataframe made from the text file output of a HeFTy inversion and plot it

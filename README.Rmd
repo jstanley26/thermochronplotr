@@ -82,7 +82,7 @@ plot2
 Again, `plot2` is a `ggplot` object and can be customized
 
 ### date-eU plots for multiple samples
-To use this function you must first create or read in a dataframe with (U-Th)/He data that has columns labeled "eU", "Date", "Unc","Color", and "Sample", where eU is the effective Uranium, Date is the (U-Th)/He date, Unc is the uncertaity (for error bars), and Sample is the sample name (only truly required if you have more than one sample you are trying to plot)
+To use this function you must first create or read in a dataframe with (U-Th)/He data that has columns labeled "eU", "Date", "Unc","Color", and "Sample", where eU is the effective Uranium, Date is the (U-Th)/He date, Unc is the uncertaity (for error bars), and Sample is the sample name (only truly required if you have more than one sample you are trying to plot). "Color" is a column by which you can color the data points, for example you might have most of the data in black, but a few data points that are outliers to be plotted in grey that info is contained in the "Color" column.
 
 ```{r}
 fn=system.file("extdata","AHe_data.csv",package="thermochronplotr")
@@ -92,7 +92,7 @@ plot3
 ```
 If you have split your data into bins to model in heFTy, you can denote where these are separated with vertical dashed lines by inputing the `eUbin` value(s) for example if your low eU bin was <15ppm, you would put in `eUbin=15`. If you had low, medium, and high eU bins split at <15ppm, 15-30 ppm, and >30ppm, you would put in `eUbin=c(15,30)`. 
 
-If you had forward models that you want to plot predicted date-eU paths you can plot these by adding a second dataframe, `bestfitdf`, with those predictions. Again this dataframe needs to have columns "Date" and "eU" (and "Sample" if there are multiple samples:
+If you had forward models that you want to plot predicted date-eU paths you can plot these by adding a second dataframe, `bestfitdf`, with those predictions. Again this dataframe needs to have columns "Date" and "eU" (and "Sample" if there are multiple samples):
 
 ```{r}
 fn2=system.file("extdata","ForwardModels.csv",package="thermochronplotr")
@@ -110,3 +110,4 @@ plot5 = shuffle_plots(hedf,bestfitdf,dfplot2,cons2)
 plot5
 
 ```
+Axis limits are the same across the shuffled grid and can be input manually or are calculated from the total dataset

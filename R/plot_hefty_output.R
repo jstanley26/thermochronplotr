@@ -8,10 +8,12 @@
 #' @param dF tidy dataframe extracted from HeFTy paths extracted with `readpaths()`
 #' @param constraints dataframe with HeFTy constraints extracted with `readconstraints()`
 #' @param facet_vars which variable to facet on, defaults to `Sample`. Currently the only option
+#' @param timelim vector of length 2 with limits for time (x) axis. Defaults to NA, which lets ggplot set limits
+#' @param templim vector of length 2 with limits for temperature (y) axis. Defaults to NA, which lets ggplot set limits
 #' @export
 #' @examples
 #' HeFTySinglePlot()
-plot_hefty_output <- function(dF,constraints,facet_vars='Sample'){
+plot_hefty_output <- function(dF,constraints,facet_vars='Sample',timelim=c(NA,NA),templim=c(NA,NA)){
   constraints2 <-  constraints %>% semi_join(dF, by='Sample')
   p2=dF %>%
     ggplot()+
@@ -28,7 +30,8 @@ plot_hefty_output <- function(dF,constraints,facet_vars='Sample'){
           legend.position='bottom'
     )+
     scale_x_reverse()+
-    scale_y_reverse()
+    scale_y_reverse()+
+    coord_cartesian(xlim=c(timelim[2],timelim[1]),ylim=c(templim[2],templim[1]))
     p2
   return(p2)
 }

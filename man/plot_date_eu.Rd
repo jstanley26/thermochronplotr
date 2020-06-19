@@ -4,7 +4,14 @@
 \alias{plot_date_eu}
 \title{A plotting function for  (U-Th)/He data}
 \usage{
-plot_date_eu(hedf, bestfitdf = NULL, eUbin = NULL, facet_vars = "Sample")
+plot_date_eu(
+  hedf,
+  bestfitdf = NULL,
+  eUbin = NULL,
+  facet_vars = "Sample",
+  helim = c(NA, NA),
+  eUlim = c(NA, NA)
+)
 }
 \arguments{
 \item{hedf}{tidy dataframe with columns labeled "eU", "Date", "Unc","Color", and "Sample"}
@@ -14,6 +21,10 @@ plot_date_eu(hedf, bestfitdf = NULL, eUbin = NULL, facet_vars = "Sample")
 \item{eUbin}{value or vector for eU value(s) where bins are split for HeFTy modeling}
 
 \item{facet_vars}{which variable to facet on, defaults to `Sample`. Currently the only option}
+
+\item{helim}{limits for the y (He date) axis, must be a vector of 2-defaults to NA which lets ggplot set axis limits}
+
+\item{eUlim}{limits for the x (eU) axis, must be a vector of 2-defaults to NA which lets ggplot set axis limits}
 }
 \description{
 This function will take a tidy dataframe of (U-Th)/He data and make simple plots it
