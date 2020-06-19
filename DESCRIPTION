@@ -4,11 +4,19 @@ Title: Make Common Plots in AHe Thermochronology
 Version: 0.1.0
 Author: Jessica Stanley
 Maintainer: Jessica <jstanley26@gmail.com>
-Description: This package takes the output text files that result from inversion models from the HeFTy thermal history modelling software (Ketcham, 2005) and plots them. There are options both for single inversions and to plot multiple inversions in a grid format. Future versions will make date-eU plots.
+Description: This package takes the output text files that result from inversion models from the HeFTy thermal history modelling software (Ketcham, 2005) and plots them. There are options both for single inversions and to plot multiple inversions in a grid format. Also makes date-eU plots for (U-Th)/He data and shuffles those plots next to the HeFTy model for the same sample.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: tidyr, readr, stringr, ggplot2, dplyr, magrittr, purrr
+Imports: 
+    tidyr,
+    readr,
+    stringr,
+    ggplot2,
+    dplyr,
+    magrittr,
+    purrr,
+    grid
 Depends: rlang (>= 0.4.5)
 RoxygenNote: 7.1.0
 URL: https://github.com/jstanley26/thermochronplotr

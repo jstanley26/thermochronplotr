@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_hefty_output.R
 \name{plot_hefty_output}
 \alias{plot_hefty_output}
-\title{A plotting function for single HeFTy inversions}
+\title{A plotting function for HeFTy inversions}
 \usage{
 plot_hefty_output(dF, constraints, facet_vars = "Sample")
 }

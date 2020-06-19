@@ -22,7 +22,7 @@ The goal of thermochronplotr is to make several commonly used plots for low temp
 
 There several functios which import the text files output by the thermal history modelling software HeFTy at the end of an inverse model run and plots them as a single panel (for one model) or a faceted grid (for multiple models)
 
-Future versions will have tools to make date-eU plots from the AHe data and plot these as a shuffled grid with HeFTy models
+This can also make make date-eU plots from the AHe data and plot these as a shuffled grid with HeFTy models to show data and models side by side.
 
 ## Installation
 
@@ -66,9 +66,9 @@ To plot the results from multple inversions, for example from more than one samp
 
 ```{r}
 fn=system.file("extdata","HeFTyOut-Sample1.txt",package="thermochronplotr")
-samplename = 'Sample 1'
+samplename = 'Sample1'
 fn2=system.file("extdata","HeFTyOut-Sample2.txt",package="thermochronplotr")
-samplename2 = 'Sample 2'
+samplename2 = 'Sample2'
 
 fns = c(fn, fn2)
 sns = c(samplename,samplename2)
@@ -80,7 +80,33 @@ plot2
 ```
 
 Again, `plot2` is a `ggplot` object and can be customized
+
+### date-eU plots for multiple samples
+To use this function you must first create or read in a dataframe with (U-Th)/He data that has columns labeled "eU", "Date", "Unc","Color", and "Sample", where eU is the effective Uranium, Date is the (U-Th)/He date, Unc is the uncertaity (for error bars), and Sample is the sample name (only truly required if you have more than one sample you are trying to plot)
+
 ```{r}
+fn=system.file("extdata","AHe_data.csv",package="thermochronplotr")
+hedf<-readr::read_csv(fn)
+plot3 = plot_date_eu(hedf)
+plot3
+```
+If you have split your data into bins to model in heFTy, you can denote where these are separated with vertical dashed lines by inputing the `eUbin` value(s) for example if your low eU bin was <15ppm, you would put in `eUbin=15`. If you had low, medium, and high eU bins split at <15ppm, 15-30 ppm, and >30ppm, you would put in `eUbin=c(15,30)`. 
+
+If you had forward models that you want to plot predicted date-eU paths you can plot these by adding a second dataframe, `bestfitdf`, with those predictions. Again this dataframe needs to have columns "Date" and "eU" (and "Sample" if there are multiple samples:
+
+```{r}
+fn2=system.file("extdata","ForwardModels.csv",package="thermochronplotr")
+bestfitdf <- readr::read_csv(fn2)
+plot4 = plot_date_eu(hedf,bestfitdf,eUbin=c(15,30))
+plot4
+```
+Again, plots 3 and 4 are ggplot objects that can be modified
+
+### Shuffling HeFTy and Date-eU plots
+Often it is nice to look at the data and the models together, so we can create a plot that places them side by side for the same sample. The inputs are the same as for the individual HeFTy or date-eU plots, so we can use the dataframes loaded earlier in the examples. Note that it is required that you have a forward model `bestfitdf` to run this function.
+
+```{r}
+plot5 = shuffle_plots(hedf,bestfitdf,dfplot2,cons2)
+plot5
 
 ```
-

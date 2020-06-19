@@ -1,6 +1,6 @@
 
 
-#' A plotting function for single HeFTy inversions
+#' A plotting function for HeFTy inversions
 #'
 #' This function will take a tidy dataframe made from the text file output of a HeFTy inversion and plot it
 #' @import dplyr
@@ -19,7 +19,7 @@ plot_hefty_output <- function(dF,constraints,facet_vars='Sample'){
     geom_rect(aes(xmin=MinTime, ymin=MinTemp, xmax=MaxTime, ymax=MaxTemp, group=Const_num), data=constraints2, fill=NA, linetype='dashed', color='black')+
     facet_wrap(facets={{facet_vars}}, ncol=4)+
     scale_color_grey(start=0.8, end=.2)+
-    labs(y='Temp (C)', x='Time (Ma)', title='HeFTy Time-Temp Paths')+
+    labs(y='Temp (C)', x='Time (Ma)')+
     theme_linedraw()+
     guides(color=guide_legend(title='Model Fit'))+
     theme(strip.background=element_rect(fill=NA,color=NA),
