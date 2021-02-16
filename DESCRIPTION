@@ -18,6 +18,6 @@ Imports:
     purrr,
     grid
 Depends: rlang (>= 0.4.5)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 URL: https://github.com/jstanley26/thermochronplotr
 BugReports: https://github.com/jstanley26/thermochronplotr/issues

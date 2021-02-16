@@ -38,6 +38,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(thermochronplotr)
+library(tidyverse)
 ```
 
 ### Single HeFTy inversion plot
@@ -110,4 +111,11 @@ plot5 = shuffle_plots(hedf,bestfitdf,dfplot2,cons2)
 plot5
 
 ```
-Axis limits are the same across the shuffled grid and can be input manually or are calculated from the total dataset
+Axis limits are the same across the shuffled grid and can be input manually or are calculated from the total dataset. You can also change the order in which the samples are plotted by making the "Sample" column of `hedf` into a factor with custom levels. For example:
+```{r}
+hedf2 = hedf %>%  mutate(Sample = factor(Sample,levels=c('Sample2', 'Sample1')))
+plot6 = shuffle_plots(hedf2,bestfitdf,dfplot2,cons2)
+plot6
+```
+
+

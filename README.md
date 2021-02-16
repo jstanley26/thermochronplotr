@@ -38,6 +38,28 @@ This is a basic example which shows you how to solve a common problem:
 ``` r
 library(thermochronplotr)
 #> Loading required package: rlang
+library(tidyverse)
+#> ── Attaching packages ───────────────────────────────── tidyverse 1.3.0 ──
+#> ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+#> ✓ tibble  3.0.3     ✓ dplyr   1.0.0
+#> ✓ tidyr   1.1.0     ✓ stringr 1.4.0
+#> ✓ readr   1.3.1     ✓ forcats 0.5.0
+#> ── Conflicts ──────────────────────────────────── tidyverse_conflicts() ──
+#> x purrr::%@%()         masks rlang::%@%()
+#> x purrr::as_function() masks rlang::as_function()
+#> x dplyr::filter()      masks stats::filter()
+#> x purrr::flatten()     masks rlang::flatten()
+#> x purrr::flatten_chr() masks rlang::flatten_chr()
+#> x purrr::flatten_dbl() masks rlang::flatten_dbl()
+#> x purrr::flatten_int() masks rlang::flatten_int()
+#> x purrr::flatten_lgl() masks rlang::flatten_lgl()
+#> x purrr::flatten_raw() masks rlang::flatten_raw()
+#> x purrr::invoke()      masks rlang::invoke()
+#> x dplyr::lag()         masks stats::lag()
+#> x purrr::list_along()  masks rlang::list_along()
+#> x purrr::modify()      masks rlang::modify()
+#> x purrr::prepend()     masks rlang::prepend()
+#> x purrr::splice()      masks rlang::splice()
 ```
 
 ### Single HeFTy inversion plot
@@ -174,4 +196,15 @@ plot5
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" /> Axis
 limits are the same across the shuffled grid and can be input manually
-or are calculated from the total dataset
+or are calculated from the total dataset. You can also change the order
+in which the samples are plotted by making the “Sample” column of `hedf`
+into a factor with custom levels. For
+example:
+
+``` r
+hedf2 = hedf %>%  mutate(Sample = factor(Sample,levels=c('Sample2', 'Sample1')))
+plot6 = shuffle_plots(hedf2,bestfitdf,dfplot2,cons2)
+plot6
+```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
