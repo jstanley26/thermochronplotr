@@ -6,9 +6,10 @@
 \usage{
 shuffle_plots(
   hedf,
-  bestfitdf,
+  bestfitdf = NULL,
   heftydf,
   constraints,
+  synthetic = NULL,
   eUbin = NULL,
   helim = c(NA, NA),
   eUlim = c(NA, NA),
@@ -24,6 +25,8 @@ shuffle_plots(
 \item{heftydf}{tidy dataframe extracted from HeFTy paths extracted with `readpaths()`}
 
 \item{constraints}{dataframe with HeFTy constraints extracted with `readconstraints()`}
+
+\item{synthetic}{dataframe with synthetic/binned data points used in HeFTy modelling. Must have column names equal to "eU", "Date", "Unc", and "Sample"}
 
 \item{eUbin}{value or vector for eU value(s) where bins are split for HeFTy modeling}
 

@@ -7,6 +7,7 @@
 plot_date_eu(
   hedf,
   bestfitdf = NULL,
+  synthetic = NULL,
   eUbin = NULL,
   facet_vars = "Sample",
   helim = c(NA, NA),
@@ -17,6 +18,8 @@ plot_date_eu(
 \item{hedf}{tidy dataframe with columns labeled "eU", "Date", "Unc","Color", and "Sample"}
 
 \item{bestfitdf}{dataframe containing prediction of best fit path from hefty. must have column names equal to "eU" and "Date"}
+
+\item{synthetic}{dataframe containing binned or averaged ages used in HeFTy modelling. must have column names equal to "eU", "Date", and "Unc"}
 
 \item{eUbin}{value or vector for eU value(s) where bins are split for HeFTy modeling}
 

@@ -4,7 +4,6 @@
 # thermochronplotr
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 The goal of thermochronplotr is to make several commonly used plots for
@@ -39,34 +38,30 @@ This is a basic example which shows you how to solve a common problem:
 library(thermochronplotr)
 #> Loading required package: rlang
 library(tidyverse)
-#> ── Attaching packages ───────────────────────────────── tidyverse 1.3.0 ──
-#> ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-#> ✓ tibble  3.0.3     ✓ dplyr   1.0.0
-#> ✓ tidyr   1.1.0     ✓ stringr 1.4.0
-#> ✓ readr   1.3.1     ✓ forcats 0.5.0
-#> ── Conflicts ──────────────────────────────────── tidyverse_conflicts() ──
-#> x purrr::%@%()         masks rlang::%@%()
-#> x purrr::as_function() masks rlang::as_function()
-#> x dplyr::filter()      masks stats::filter()
-#> x purrr::flatten()     masks rlang::flatten()
-#> x purrr::flatten_chr() masks rlang::flatten_chr()
-#> x purrr::flatten_dbl() masks rlang::flatten_dbl()
-#> x purrr::flatten_int() masks rlang::flatten_int()
-#> x purrr::flatten_lgl() masks rlang::flatten_lgl()
-#> x purrr::flatten_raw() masks rlang::flatten_raw()
-#> x purrr::invoke()      masks rlang::invoke()
-#> x dplyr::lag()         masks stats::lag()
-#> x purrr::list_along()  masks rlang::list_along()
-#> x purrr::modify()      masks rlang::modify()
-#> x purrr::prepend()     masks rlang::prepend()
-#> x purrr::splice()      masks rlang::splice()
+#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+#> ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
+#> ✔ tibble  3.1.7     ✔ dplyr   1.0.9
+#> ✔ tidyr   1.2.0     ✔ stringr 1.4.0
+#> ✔ readr   2.1.2     ✔ forcats 0.5.1
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ purrr::%@%()         masks rlang::%@%()
+#> ✖ purrr::as_function() masks rlang::as_function()
+#> ✖ dplyr::filter()      masks stats::filter()
+#> ✖ purrr::flatten()     masks rlang::flatten()
+#> ✖ purrr::flatten_chr() masks rlang::flatten_chr()
+#> ✖ purrr::flatten_dbl() masks rlang::flatten_dbl()
+#> ✖ purrr::flatten_int() masks rlang::flatten_int()
+#> ✖ purrr::flatten_lgl() masks rlang::flatten_lgl()
+#> ✖ purrr::flatten_raw() masks rlang::flatten_raw()
+#> ✖ purrr::invoke()      masks rlang::invoke()
+#> ✖ dplyr::lag()         masks stats::lag()
+#> ✖ purrr::splice()      masks rlang::splice()
 ```
 
 ### Single HeFTy inversion plot
 
 For a single inversion model using the example file (replace with your
-own when
-ready)
+own when ready)
 
 ``` r
 fn=system.file("extdata","HeFTyOut-Sample1.txt",package="thermochronplotr")
@@ -94,8 +89,7 @@ plot1+coord_cartesian(xlim=c(200,0))
 
 To plot the results from multple inversions, for example from more than
 one sample, you need to create a vector of the file names, and a
-coresponding vector of the sample names (in the same
-order)
+coresponding vector of the sample names (in the same order)
 
 ``` r
 fn=system.file("extdata","HeFTyOut-Sample1.txt",package="thermochronplotr")
@@ -121,7 +115,7 @@ Again, `plot2` is a `ggplot` object and can be customized
 To use this function you must first create or read in a dataframe with
 (U-Th)/He data that has columns labeled “eU”, “Date”, “Unc”,“Color”, and
 “Sample”, where eU is the effective Uranium, Date is the (U-Th)/He date,
-Unc is the uncertaity (for error bars), and Sample is the sample name
+Unc is the uncertainty (for error bars), and Sample is the sample name
 (only truly required if you have more than one sample you are trying to
 plot). “Color” is a column by which you can color the data points, for
 example you might have most of the data in black, but a few data points
@@ -130,51 +124,53 @@ that are outliers to be plotted in grey that info is contained in the
 
 ``` r
 fn=system.file("extdata","AHe_data.csv",package="thermochronplotr")
-hedf<-readr::read_csv(fn)
-#> Warning: Missing column names filled in: 'X1' [1]
-#> Parsed with column specification:
-#> cols(
-#>   .default = col_double(),
-#>   Sample = col_character(),
-#>   Grain = col_character(),
-#>   Color = col_character(),
-#>   Description = col_character(),
-#>   Elevation_m = col_character(),
-#>   Sample_cat = col_character()
-#> )
-#> See spec(...) for full column specifications.
+hedf<-readr::read_csv(fn, show_col_types = FALSE)
 plot3 = plot_date_eu(hedf)
 plot3
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" /> If
 you have split your data into bins to model in heFTy, you can denote
-where these are separated with vertical dashed lines by inputing the
+where these are separated with vertical dashed lines by inputting the
 `eUbin` value(s) for example if your low eU bin was \<15ppm, you would
 put in `eUbin=15`. If you had low, medium, and high eU bins split at
 \<15ppm, 15-30 ppm, and \>30ppm, you would put in `eUbin=c(15,30)`.
+Alternately if you binned or averaged your data for HeFTy modeling you
+can also display this synthetic or aggregate data on the plot as large
+open diamonds by adding another dataframe, `synthetic`. It must have
+column names “Date”, “eU”, and “Unc”, plus “Sample” if there are
+multiple samples.
 
 If you had forward models that you want to plot predicted date-eU paths
 you can plot these by adding a second dataframe, `bestfitdf`, with those
 predictions. Again this dataframe needs to have columns “Date” and “eU”
-(and “Sample” if there are multiple
-samples):
+(and “Sample” if there are multiple samples)
+
+An exaple with eU bins denoted both by dashed lines and with the
+synthetic grains and with the best fit forward models plotted:
 
 ``` r
-fn2=system.file("extdata","ForwardModels.csv",package="thermochronplotr")
-bestfitdf <- readr::read_csv(fn2)
-#> Warning: Missing column names filled in: 'X1' [1]
-#> Parsed with column specification:
-#> cols(
-#>   X1 = col_double(),
-#>   eU = col_double(),
-#>   Date = col_double(),
-#>   Sample = col_character(),
-#>   Description = col_character(),
-#>   Elevation_m = col_character(),
-#>   Sample_cat = col_character()
-#> )
-plot4 = plot_date_eu(hedf,bestfitdf,eUbin=c(15,30))
+fn3=system.file("extdata","SyntheticGrains.csv",package="thermochronplotr")
+synthetic <- readr::read_csv(fn3)
+#> Rows: 4 Columns: 5
+#> ── Column specification ────────────────────────────────────────────────────────
+#> Delimiter: ","
+#> chr (2): Sample, Bin
+#> dbl (3): eU, Date, Unc
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+fn4=system.file("extdata","ForwardModels.csv",package="thermochronplotr")
+bestfitdf <- readr::read_csv(fn4)
+#> New names:
+#> Rows: 26 Columns: 7
+#> ── Column specification
+#> ──────────────────────────────────────────────────────── Delimiter: "," chr
+#> (4): Sample, Description, Elevation_m, Sample_cat dbl (3): ...1, eU, Date
+#> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+#> Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> • `` -> `...1`
+plot4 = plot_date_eu(hedf,bestfitdf,synthetic,eUbin=c(15,30))
 plot4
 ```
 
@@ -186,11 +182,12 @@ Again, plots 3 and 4 are ggplot objects that can be modified
 Often it is nice to look at the data and the models together, so we can
 create a plot that places them side by side for the same sample. The
 inputs are the same as for the individual HeFTy or date-eU plots, so we
-can use the dataframes loaded earlier in the examples. Note that it is
-required that you have a forward model `bestfitdf` to run this function.
+can use the dataframes loaded earlier in the examples. Note that the
+best fit forward model `bestfitdf`, synthetic grains `synthetic` and
+lines denoting eU bins `eUbin` are optional arguments.
 
 ``` r
-plot5 = shuffle_plots(hedf,bestfitdf,dfplot2,cons2)
+plot5 = shuffle_plots(hedf,bestfitdf,heftydf=dfplot2,constraints=cons2,synthetic=synthetic)
 plot5
 ```
 
@@ -198,8 +195,7 @@ plot5
 limits are the same across the shuffled grid and can be input manually
 or are calculated from the total dataset. You can also change the order
 in which the samples are plotted by making the “Sample” column of `hedf`
-into a factor with custom levels. For
-example:
+into a factor with custom levels. For example:
 
 ``` r
 hedf2 = hedf %>%  mutate(Sample = factor(Sample,levels=c('Sample2', 'Sample1')))

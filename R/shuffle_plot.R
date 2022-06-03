@@ -8,6 +8,7 @@
 #' @param bestfitdf dataframe containing prediction of best fit path from hefty. must have column names equal to "eU", "Date",and "Sample"
 #' @param heftydf tidy dataframe extracted from HeFTy paths extracted with `readpaths()`
 #' @param constraints dataframe with HeFTy constraints extracted with `readconstraints()`
+#' @param synthetic dataframe with synthetic/binned data points used in HeFTy modelling. Must have column names equal to "eU", "Date", "Unc", and "Sample"
 #' @param eUbin value or vector for eU value(s) where bins are split for HeFTy modeling
 #' @param helim limits for the y (He date) axis, must be a vector of 2-defaults to NA where limits are set based on the total dataset starting at 0
 #' @param eUlim limits for the x (eU) axis, must be a vector of 2-defaults to NA where limits are set based on the total dataset starting at 0
@@ -28,9 +29,10 @@
 
 shuffle_plots <-
   function(hedf,
-           bestfitdf,
+           bestfitdf = NULL,
            heftydf,
            constraints,
+           synthetic = NULL,
            eUbin = NULL,
            helim = c(NA, NA),
            eUlim = c(NA, NA),
@@ -59,9 +61,27 @@ shuffle_plots <-
 
     for (s in allsamples) {
       p1df1 = hedf %>% dplyr::filter(!!s == Sample)
-      p1df2 = bestfitdf %>% dplyr::filter(!!s == Sample)
 
-      p1 = plot_date_eu(p1df1, p1df2, eUbin, helim = helim, eUbin = eUbin)
+      if (!is.null(bestfitdf)) {
+        p1df2 = bestfitdf %>% dplyr::filter(!!s == Sample)
+      }
+      else {
+        p1df2 = NULL
+      }
+
+      if (!is.null(synthetic)) {
+        p1df3 = synthetic %>% dplyr::filter(!!s == Sample)
+      }
+      else {
+        p1df3 = NULL
+      }
+
+      p1 = plot_date_eu(p1df1,
+                        p1df2,
+                        p1df3,
+                        eUbin,
+                        helim = helim,
+                        eUbin = eUbin)
 
       p2df1 = heftydf %>% dplyr::filter(!!s == Sample)
       p2df2 = constraints %>% dplyr::filter(!!s == Sample)

@@ -32,7 +32,7 @@ readconstraint <- function(fn,smpl){
   datalines = findline(fn,"Inversion completed")
   i=datalines[[1]]
   fnlines=datalines[[2]]
-  constraints = readr::read_tsv(fnlines[2:(i-1)])
+  constraints = readr::read_tsv(file=c(fnlines[2:(i-1)],'\n'), show_col_types=FALSE)
   colnames(constraints) <- constraint_cols
   constraints$Sample <- smpl
   return(constraints)
@@ -81,9 +81,8 @@ readpath <- function(fn,smpl){
     mutate(TimeMa = as.numeric(TimeMa),
            TempC = as.numeric(TempC))
 
-  # str_split(fnlines[(i+6)
-  allpaths = suppressWarnings(readr::read_tsv(fnlines[(i+6):length(fnlines)]) %>%
-                                select(-contains('GOF')))
+  allpaths = suppressMessages(readr::read_tsv(file=c(fnlines[(i+6):length(fnlines)],'\n'),
+                             show_col_types = FALSE)) %>% select(-contains('GOF'))
 
   ytemp = allpaths %>%
     filter(str_detect(Data,'Temp')) %>%

@@ -16,8 +16,9 @@ Imports:
     dplyr,
     magrittr,
     purrr,
-    grid
+    grid,
+    cowplot
 Depends: rlang (>= 0.4.5)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 URL: https://github.com/jstanley26/thermochronplotr
 BugReports: https://github.com/jstanley26/thermochronplotr/issues
