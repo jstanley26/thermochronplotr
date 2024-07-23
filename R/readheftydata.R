@@ -82,7 +82,7 @@ readpath <- function(fn,smpl){
            TempC = as.numeric(TempC))
 
   allpaths = suppressMessages(readr::read_tsv(file=c(fnlines[(i+6):length(fnlines)],'\n'),
-                             show_col_types = FALSE)) %>% select(-contains('GOF'))
+                             show_col_types = FALSE)) %>% select(-contains('GOF')) %>% select(-contains('Kuiper'))
 
   ytemp = allpaths %>%
     filter(str_detect(Data,'Temp')) %>%
