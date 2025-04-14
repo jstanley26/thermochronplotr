@@ -21,15 +21,26 @@ if(is.null(bestfitdf)){
   if(is.null(synthetic)){
     synthetic<-data.frame(eU=numeric(),
                           Date=numeric(),
-                          Unc=numeric())
+                          Unc=numeric(),
+                          PredMin=numeric(),
+                          PredMax=numeric())
+  }
+  # {if(!'PredMin'%in% colnames(synthetic))
+  #   synthetic[,'PredMin'] <-NA
+  #   synthetic[,'PredMax'] <-NA
+  # }
+  if(is.null(hedf$eUu)){
+    hedf$eUu=0.15*hedf$eU
   }
 p1=ggplot(hedf)+
+  geom_linerange(aes(x=eU,ymin=PredMin,ymax=PredMax),data=synthetic,size=4, color='grey')+
   geom_vline(xintercept = eUbin,linetype='dashed',color='grey')+
   geom_line(aes(x=eU,y=Date), data=bestfitdf, alpha=0.6)+
   geom_errorbar(aes(x=eU,ymax=Date+Unc, ymin=Date-Unc),data=synthetic,width=0.75, color='dimgrey',show.legend = F)+
   geom_point(aes(x=eU, y=Date), data=synthetic, shape=5,size = 3,color='dimgrey', show.legend = F)+
   geom_point(aes(x=eU,y=Date, color=Color),size=2,show.legend = F)+
   geom_errorbar(aes(x = eU, ymax = Date+Unc, ymin = Date-Unc, color=Color), width=0.75,show.legend = F)+
+  geom_errorbarh(aes(y = Date, xmax = eU+eUu, xmin = eU-eUu, color=Color), width=0.75,show.legend = F)+
   facet_wrap(facets={{facet_vars}}, ncol=4)+
   scale_color_grey()+
   labs(y='(U-Th)/He Date (Ma)', x='eU (ppm)')+
